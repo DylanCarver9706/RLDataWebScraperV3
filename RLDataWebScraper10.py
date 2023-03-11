@@ -8,10 +8,14 @@ api_url = 'http://127.0.0.1:3000/items'
 response = requests.get(api_url)
 items = response.json()
 
+# Create a new file to write the formatted items to
 with open('NewWebScraperSingleItems.txt', 'w') as f:
-    # Go through each item and write the data to the text file
     for item in items:
-        f.write(f"Item.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: \"{item['image_location']}\", image: \"{item['image']}\"\n")
+        # Format the item attributes and write to the file
+        formatted_item = f"Item.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: \"{item['image_location']}\", image: \"{item['image']}\"\n)"
+        f.write(formatted_item)
+
+print("Done writing items to file")
 
 
 # Outputs as is DB items to a .txt file
