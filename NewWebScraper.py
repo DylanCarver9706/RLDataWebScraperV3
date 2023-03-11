@@ -20,7 +20,7 @@ for div_class in div_classes:
         items.append(item)
 
 # Step 3: Access the API and create a new item for each scraped item
-api_url = 'http://127.0.0.1:3000/daily_items'
+api_url = 'http://127.0.0.1:3000/items'
 for item in items:
     new_item = {
         'valid_status': False,

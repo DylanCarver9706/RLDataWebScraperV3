@@ -1,6 +1,7 @@
+# updates item_type from image_uri
 import requests
 
-api_url = 'http://127.0.0.1:3000/daily_items'
+api_url = 'http://127.0.0.1:3000/items'
 
 response = requests.get(api_url)
 items = response.json()

@@ -1,8 +1,9 @@
+# for valid status = false && color is empty, rerun S1 to extract images
 import requests
 from bs4 import BeautifulSoup
 import time
 
-api_url = 'http://127.0.0.1:3000/daily_items'
+api_url = 'http://127.0.0.1:3000/items'
 
 # Get the current list of daily items from the API
 response = requests.get(api_url)

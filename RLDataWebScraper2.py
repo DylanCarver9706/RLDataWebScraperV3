@@ -1,9 +1,9 @@
-# updates the rarity in the db baded on image_location
+# updates the rarity in the db based on image_location
 
 import requests
 from bs4 import BeautifulSoup
 
-api_url = 'http://127.0.0.1:3000/daily_items'
+api_url = 'http://127.0.0.1:3000/items'
 
 response = requests.get(api_url)
 items = response.json()

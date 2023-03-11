@@ -1,7 +1,8 @@
+# Go through each item and update the image uri to remove the color suffix from the image_uri
 import requests
 import json
 
-api_url = 'http://127.0.0.1:3000/daily_items'
+api_url = 'http://127.0.0.1:3000/items'
 
 # Get the current list of daily items from the API
 response = requests.get(api_url)

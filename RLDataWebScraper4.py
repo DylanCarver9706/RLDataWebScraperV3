@@ -1,7 +1,8 @@
+# takes the image_location + color and replaces image_location with that
 import requests
 import time
 
-api_url = 'http://127.0.0.1:3000/daily_items'
+api_url = 'http://127.0.0.1:3000/items'
 
 # Get the current list of daily items from the API
 response = requests.get(api_url)
