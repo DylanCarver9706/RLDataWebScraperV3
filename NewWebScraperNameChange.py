@@ -10,7 +10,7 @@ items = response.json()
 for item in items:
     image_location = item['image_location']
     if image_location:
-        image_url = f"https://rl.insider.gg/en/pc/{image_location}"
+        image_url = f"{image_location}"
         response = requests.get(image_url)
         soup = BeautifulSoup(response.content, 'html.parser')
         name_span = soup.find('span', {'id': 'itemNameSpan'})
