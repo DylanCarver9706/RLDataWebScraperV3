@@ -1,3 +1,4 @@
+# extracts the image using a web scraper from the API's image_location
 import requests
 from bs4 import BeautifulSoup
 import time
