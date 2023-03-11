@@ -3,34 +3,37 @@
 import requests
 from bs4 import BeautifulSoup
 
-# import json
+url = 'https://rl.insider.gg/en/pc/search'
 
-url = "https://rl.insider.gg/en/pc/search"
 response = requests.get(url)
-soup = BeautifulSoup(response.text, "html.parser")
-items = soup.find_all("div", class_="decalGroup")
+soup = BeautifulSoup(response.content, 'html.parser')
+items = soup.find_all('div', class_='decalGroup')
 
 for item in items:
-    data = item.get("data-decal-dropdown")
-    data_dict = eval(data)
-    for rarity in data_dict:
-        for inner_array in data_dict[rarity]:
-            name = f"{inner_array[1]} [{inner_array[2].split('/')[1]}]"
-            image_uri = inner_array[2].replace("/", "_")
-            payload = {
-                "id": "",
-                "name": name,
-                "rarity": rarity.capitalize(),
-                "item_type": "Decals",
-                "color": "",
-                "valid_status": False,
-                "image_uri": image_uri,
-                "image_location": "",
-                "image": "",
-            }
-            response = requests.post("http://127.0.0.1:3000/items", json=payload)
-            if response.status_code == 200:
-                print(f"{name} found")
+    data = item['data-decal-dropdown']
+    data = eval(data)  # convert string to dict
+
+    for sublist in data['Untradeable']:
+        info = sublist[2].split('/')
+        image_uri = '/'.join(info)
+        name = f"{info[1].capitalize()} [{info[2].capitalize()}]"
+        payload = {
+            'name': name,
+            'item_type': 'Decals',
+            'valid_status': False,
+            'image_uri': image_uri,
+            'image_location': '',
+            'image': ''
+        }
+        headers = {
+            'Content-Type': 'application/json'
+        }
+        response = requests.post('http://127.0.0.1:3000/items', json=payload, headers=headers)
+
+        if response.status_code == 200:
+            print(f"{name} found")
+        else:
+            print(f"Error: {response.status_code}")
 
 
 
