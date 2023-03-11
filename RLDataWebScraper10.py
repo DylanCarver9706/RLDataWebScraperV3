@@ -1,24 +1,40 @@
-# Outputs as is DB items to a .txt file
+# Outputs new web scraper single items to a .txt file
 
 import requests
 
-api_url = 'http://127.0.0.1:3000/daily_items'
+api_url = 'http://127.0.0.1:3000/items'
+
+# Get the current list of items from the API
 response = requests.get(api_url)
 items = response.json()
 
-with open('items.txt', 'w') as f:
+with open('NewWebScraperSingleItems.txt', 'w') as f:
+    # Go through each item and write the data to the text file
     for item in items:
-        valid_status = item['valid_status']
-        image_uri = item['image_uri']
-        item_shop_date_id = item['item_shop_date_id']
-        name = item['name']
-        rarity = item['rarity']
-        item_type = item['item_type']
-        color = item['color']
-        image_location = item['image_location']
-        image = item['image']
-        text = f"DailyItem.create(valid_status: {valid_status}, image_uri: \"{image_uri}\", item_shop_date_id: {item_shop_date_id}, name: \"{name}\", rarity: \"{rarity}\", item_type: \"{item_type}\", color: \"{color}\", image_location: \"{image_location}\", image: \"{image}\")\n"
-        f.write(text)
+        f.write(f"Item.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: \"{item['image_location']}\", image: \"{item['image']}\"\n")
+
+
+# Outputs as is DB items to a .txt file
+
+# import requests
+
+# api_url = 'http://127.0.0.1:3000/daily_items'
+# response = requests.get(api_url)
+# items = response.json()
+
+# with open('items.txt', 'w') as f:
+#     for item in items:
+#         valid_status = item['valid_status']
+#         image_uri = item['image_uri']
+#         item_shop_date_id = item['item_shop_date_id']
+#         name = item['name']
+#         rarity = item['rarity']
+#         item_type = item['item_type']
+#         color = item['color']
+#         image_location = item['image_location']
+#         image = item['image']
+#         text = f"DailyItem.create(valid_status: {valid_status}, image_uri: \"{image_uri}\", item_shop_date_id: {item_shop_date_id}, name: \"{name}\", rarity: \"{rarity}\", item_type: \"{item_type}\", color: \"{color}\", image_location: \"{image_location}\", image: \"{image}\")\n"
+#         f.write(text)
 
 
 # Outputs validated items to a .txt file
