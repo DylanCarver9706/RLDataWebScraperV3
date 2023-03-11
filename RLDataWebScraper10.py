@@ -1,4 +1,4 @@
-# Outputs new web scraper single items to a .txt file
+# Outputs new web scraper items to a .txt file
 
 import requests
 
