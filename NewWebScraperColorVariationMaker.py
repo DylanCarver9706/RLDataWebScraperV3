@@ -24,7 +24,8 @@ for item in items:
         new_item['color'] = color[1:].title()
         
         # Don't use the original image URI
-        del new_item['image_uri']
+        new_item['image_uri'] = new_item['image_uri']
+        new_item['image'] = ''
         
         # Make a POST request with the new item
         response = requests.post(url, json=new_item)
@@ -35,3 +36,4 @@ for item in items:
 
         # Set the valid status back to False for the next iteration
         new_item['valid_status'] = False
+        

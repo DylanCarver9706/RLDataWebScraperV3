@@ -1,3 +1,4 @@
+# updates "name" based on <title> from image_location
 import requests
 from bs4 import BeautifulSoup
 import json
