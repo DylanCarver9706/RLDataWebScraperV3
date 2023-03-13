@@ -50,7 +50,7 @@ with open('NewWebScraperSingleItems.txt', 'w') as f:
 # with open(output_file, "w") as f:
 #     for item in items:
 #         if item["valid_status"] is True:
-#             f.write('DailyItem.create(valid_status: {0}, image_uri: "{1}", item_shop_date_id: date1.id, name: "{2}", rarity: "{3}", item_type: "{4}", color: "{5}", image_location: "{6}", image: "{7}")\n'.format(
+#             f.write('DailyItem.create(valid_status: {0}, image_uri: "{1}", name: "{2}", rarity: "{3}", item_type: "{4}", color: "{5}", image_location: "{6}", image: "{7}")\n'.format(
 #                 item["valid_status"], item["image_uri"], item["name"], item["rarity"], item["item_type"], item["color"], item["image_location"], item["image"]
 #             ))
 
