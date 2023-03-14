@@ -8,7 +8,8 @@ html = response.text
 soup = BeautifulSoup(html, 'html.parser')
 
 # Step 2: Find all items with a class of "item common", "item uncommon", etc.
-div_classes = ["item common", "item uncommon", "item limited", "item rare", "item veryrare", "item import", "item exotic", "item blackmarket"]
+div_classes = ["item common", "item uncommon", "item limited", "item limited new", "item rare", "item veryrare", "item import", "item exotic", "item blackmarket"]
+# div_classes = ["item limited new"]
 items = []
 for div_class in div_classes:
     item_divs = soup.find_all('div', class_=div_class)

@@ -1,42 +1,42 @@
 # Outputs items where "image" is not empty
 
-import requests
+# import requests
 
-url = "http://127.0.0.1:3000/items"
+# url = "http://127.0.0.1:3000/items"
 
-# Get all items from the API
-response = requests.get(url)
-items = response.json()
+# # Get all items from the API
+# response = requests.get(url)
+# items = response.json()
 
-# Create or overwrite the output file
-with open("NewWebScraperAllMultipleItems.txt", "w") as f:
-    # Loop through each item in the API
-    for item in items:
-        # Check if the image location is empty
-        if item['image'] != '':
-            # Write the formatted string to the file
-            f.write(f"Item.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: \"{item['image_location']}\", image: \"{item['image']}\")\n")
+# # Create or overwrite the output file
+# with open("NewWebScraperAllMultipleItems.txt", "w") as f:
+#     # Loop through each item in the API
+#     for item in items:
+#         # Check if the image location is empty
+#         if item['image'] != '':
+#             # Write the formatted string to the file
+#             f.write(f"Item.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: \"{item['image_location']}\", image: \"{item['image']}\")\n")
 
 
 
 
 # Outputs new web scraper items to a .txt file
 
-# import requests
-# import time
+import requests
+import time
 
-# api_url = 'http://127.0.0.1:3000/items'
+api_url = 'http://127.0.0.1:3000/items'
 
-# # Get the current list of items from the API
-# response = requests.get(api_url)
-# items = response.json()
+# Get the current list of items from the API
+response = requests.get(api_url)
+items = response.json()
 
-# # Create a new file with a unique filename based on the current timestamp
-# filename = f"NewWebScraperSeeds_{int(time.time())}.txt"
-# with open(filename, 'w') as f:
-#     # Go through each item and write the data to the text file
-#     for item in items:
-#         f.write(f"Item.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: \"{item['image_location']}\", image: \"{item['image']}\")\n")
+# Create a new file with a unique filename based on the current timestamp
+filename = f"NewWebScraperSeeds_{int(time.time())}.txt"
+with open(filename, 'w') as f:
+    # Go through each item and write the data to the text file
+    for item in items:
+        f.write(f"Item.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: \"{item['image_location']}\", image: \"{item['image']}\")\n")
 
 
 # Outputs as is DB items to a .txt file
