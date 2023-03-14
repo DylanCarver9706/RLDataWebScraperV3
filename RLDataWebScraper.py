@@ -15,7 +15,6 @@ updated_count = 0
 skipped_count = 0
 
 last_attempted_item = 0
-# 23181
 
 # Go through each item and update the image
 for item in items:

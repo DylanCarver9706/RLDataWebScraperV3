@@ -10,7 +10,7 @@ response = requests.get(url)
 items = response.json()
 
 for item in items:
-    if item['valid_status'] == True:
+    # if item['valid_status'] == True:
         for color in colors:
             if item['image_location'].endswith(color):
                 new_item = item.copy()
