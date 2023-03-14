@@ -12,7 +12,7 @@ updated_count = 0
 
 # Go through each item and update the image uri
 for item in items:
-    if item['valid_status'] is False and item['image_uri']:
+    if item['image_uri']:
         # Remove the color suffix from the image_uri
         for color_suffix in ['/black', '/sienna', '/cobalt', '/crimson', '/fgreen', '/grey', '/lime', '/orange', '/pink', '/purple', '/saffron', '/sblue', '/white', '/gold']:
             if item['image_uri'].endswith(color_suffix):
