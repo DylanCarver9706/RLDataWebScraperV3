@@ -1,20 +1,42 @@
-# Outputs new web scraper items to a .txt file
+# Outputs items where "image" is not empty
 
 import requests
-import time
 
-api_url = 'http://127.0.0.1:3000/items'
+url = "http://127.0.0.1:3000/items"
 
-# Get the current list of items from the API
-response = requests.get(api_url)
+# Get all items from the API
+response = requests.get(url)
 items = response.json()
 
-# Create a new file with a unique filename based on the current timestamp
-filename = f"NewWebScraperSeeds_{int(time.time())}.txt"
-with open(filename, 'w') as f:
-    # Go through each item and write the data to the text file
+# Create or overwrite the output file
+with open("NewWebScraperAllMultipleItems.txt", "w") as f:
+    # Loop through each item in the API
     for item in items:
-        f.write(f"Item.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: \"{item['image_location']}\", image: \"{item['image']}\")\n")
+        # Check if the image location is empty
+        if item['image'] != '':
+            # Write the formatted string to the file
+            f.write(f"Item.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: \"{item['image_location']}\", image: \"{item['image']}\")\n")
+
+
+
+
+# Outputs new web scraper items to a .txt file
+
+# import requests
+# import time
+
+# api_url = 'http://127.0.0.1:3000/items'
+
+# # Get the current list of items from the API
+# response = requests.get(api_url)
+# items = response.json()
+
+# # Create a new file with a unique filename based on the current timestamp
+# filename = f"NewWebScraperSeeds_{int(time.time())}.txt"
+# with open(filename, 'w') as f:
+#     # Go through each item and write the data to the text file
+#     for item in items:
+#         f.write(f"Item.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: \"{item['image_location']}\", image: \"{item['image']}\")\n")
 
 
 # Outputs as is DB items to a .txt file
@@ -53,7 +75,7 @@ with open(filename, 'w') as f:
 # with open(output_file, "w") as f:
 #     for item in items:
 #         if item["valid_status"] is True:
-#             f.write('DailyItem.create(valid_status: {0}, image_uri: "{1}", name: "{2}", rarity: "{3}", item_type: "{4}", color: "{5}", image_location: "{6}", image: "{7}")\n'.format(
+#             f.write('Item.create(valid_status: {0}, image_uri: "{1}", name: "{2}", rarity: "{3}", item_type: "{4}", color: "{5}", image_location: "{6}", image: "{7}")\n'.format(
 #                 item["valid_status"], item["image_uri"], item["name"], item["rarity"], item["item_type"], item["color"], item["image_location"], item["image"]
 #             ))
 
