@@ -8,19 +8,13 @@ url = "http://127.0.0.1:3000/items"
 response = requests.get(url)
 items = response.json()
 
-# Organize items by item_type
-items_by_type = {}
-for item in items:
-    if item['item_type'] not in items_by_type:
-        items_by_type[item['item_type']] = []
-    items_by_type[item['item_type']].append(item)
-
-# Write items to file
 with open('ItemTypeSeparator.txt', 'w') as f:
-    for item_type, items in items_by_type.items():
-        f.write(f"### {item_type} ###\n\n")
-        for item in items:
-            f.write(f"{item['item_type']}.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: {item['image_location']}, image: \"{item['image']}\"\n\n")
+    for item in items:
+        # Format the output string
+        output_string = f'{item["item_type"]}.create(valid_status: {item["valid_status"]}, image_uri: "{item["image_uri"]}", name: "{item["name"]}", rarity: "{item["rarity"]}", item_type: "{item["item_type"]}", color: "{item["color"]}", image_location: {item["image_location"]}, image: "{item["image"]}")\n'
+
+        # Append the output to the file
+        f.write(output_string)
 
 
 
