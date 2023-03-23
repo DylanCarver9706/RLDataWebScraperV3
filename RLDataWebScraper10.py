@@ -2,25 +2,30 @@
 
 import requests
 
+import requests
+
 url = "http://127.0.0.1:3000/items"
+types = set()
 
 # Get all items from the API
 response = requests.get(url)
 items = response.json()
 
-# Organize items by item_type
-items_by_type = {}
+# Collect all unique item types
 for item in items:
-    if item['item_type'] not in items_by_type:
-        items_by_type[item['item_type']] = []
-    items_by_type[item['item_type']].append(item)
+    if item["item_type"]:
+        types.add(item["item_type"])
 
-# Write items to file
-with open('ItemTypeSeparator.txt', 'w') as f:
-    for item_type, items in items_by_type.items():
-        f.write(f"### {item_type} ###\n\n")
+# Create and write to file for each type
+for item_type in types:
+    file_name = f"{item_type.capitalize()}sSeparator.txt"
+    with open(file_name, "w") as file:
         for item in items:
-            f.write(f"{item['item_type']}.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: {item['image_location']}, image: \"{item['image']}\"\n\n")
+            if item["item_type"] == item_type:
+                line = f'{item_type}.create(valid_status: {item["valid_status"]}, image_uri: "{item["image_uri"]}", name: "{item["name"]}", rarity: "{item["rarity"]}", item_type: "{item["item_type"]}", color: "{item["color"]}", image_location: "{item["image_location"]}", image: "{item["image"]}")\n'
+                file.write(line)
+    print(f"Finished writing {item_type} items to {file_name}")
+
 
 
 
