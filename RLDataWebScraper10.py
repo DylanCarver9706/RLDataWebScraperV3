@@ -2,30 +2,25 @@
 
 import requests
 
-import requests
-
 url = "http://127.0.0.1:3000/items"
-types = set()
 
 # Get all items from the API
 response = requests.get(url)
 items = response.json()
 
-# Collect all unique item types
+# Organize items by item_type
+items_by_type = {}
 for item in items:
-    if item["item_type"]:
-        types.add(item["item_type"])
+    if item['item_type'] not in items_by_type:
+        items_by_type[item['item_type']] = []
+    items_by_type[item['item_type']].append(item)
 
-# Create and write to file for each type
-for item_type in types:
-    file_name = f"{item_type.capitalize()}sSeparator.txt"
-    with open(file_name, "w") as file:
+# Write items to file
+with open('ItemTypeSeparator.txt', 'w') as f:
+    for item_type, items in items_by_type.items():
+        f.write(f"### {item_type} ###\n\n")
         for item in items:
-            if item["item_type"] == item_type:
-                line = f'{item_type}.create(valid_status: {item["valid_status"]}, image_uri: "{item["image_uri"]}", name: "{item["name"]}", rarity: "{item["rarity"]}", item_type: "{item["item_type"]}", color: "{item["color"]}", image_location: "{item["image_location"]}", image: "{item["image"]}")\n'
-                file.write(line)
-    print(f"Finished writing {item_type} items to {file_name}")
-
+            f.write(f"{item['item_type']}.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: {item['image_location']}, image: \"{item['image']}\"\n\n")
 
 
 
@@ -53,21 +48,21 @@ for item_type in types:
 
 # Outputs new web scraper items to a .txt file
 
-import requests
-import time
+# import requests
+# import time
 
-api_url = 'http://127.0.0.1:3000/items'
+# api_url = 'http://127.0.0.1:3000/items'
 
-# Get the current list of items from the API
-response = requests.get(api_url)
-items = response.json()
+# # Get the current list of items from the API
+# response = requests.get(api_url)
+# items = response.json()
 
-# Create a new file with a unique filename based on the current timestamp
-filename = f"NewWebScraperSeeds_{int(time.time())}.txt"
-with open(filename, 'w') as f:
-    # Go through each item and write the data to the text file
-    for item in items:
-        f.write(f"Item.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: \"{item['image_location']}\", image: \"{item['image']}\")\n")
+# # Create a new file with a unique filename based on the current timestamp
+# filename = f"NewWebScraperSeeds_{int(time.time())}.txt"
+# with open(filename, 'w') as f:
+#     # Go through each item and write the data to the text file
+#     for item in items:
+#         f.write(f"Item.create(valid_status: {item['valid_status']}, image_uri: \"{item['image_uri']}\", name: \"{item['name']}\", rarity: \"{item['rarity']}\", item_type: \"{item['item_type']}\", color: \"{item['color']}\", image_location: \"{item['image_location']}\", image: \"{item['image']}\")\n")
 
 
 # Outputs as is DB items to a .txt file
